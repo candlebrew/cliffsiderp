@@ -20,23 +20,6 @@ async def run():
     db = await asyncpg.connect(dsn=dbURL, ssl='require')
     
 ## Bot Setup ----------------------------------------------------------
-@bot.group()
-async def dev(ctx):
-    pass
-
-@dev.command(pass_context=True)
-@is_dev()
-async def email(ctx):
-    await ctx.send("Email: cliffsidebot@gmail.com")
-    
-@dev.command(pass_context=True)
-@is_dev()
-async def sql(ctx, *, sqlText: str):
-    if ";" not in sqlText:
-        sqlText += ";"
-    await db.execute(sqlText)
-    await ctx.send("Complete.")
-    
 token = os.environ.get('DISCORD_BOT_TOKEN') # This is hosted on HEROKU
 
 client = discord.Client()
@@ -62,6 +45,23 @@ def is_admin():
     return commands.check(predicate)
 
 ## Code Here ----------------------------------------------------------
+@bot.group()
+async def dev(ctx):
+    pass
+
+@dev.command(pass_context=True)
+@is_dev()
+async def email(ctx):
+    await ctx.send("Email: cliffsidebot@gmail.com")
+    
+@dev.command(pass_context=True)
+@is_dev()
+async def sql(ctx, *, sqlText: str):
+    if ";" not in sqlText:
+        sqlText += ";"
+    await db.execute(sqlText)
+    await ctx.send("Complete.")
+    
 @bot.group(invoke_without_command=True, aliases=["rp","roleplays","rps"])
 async def roleplay(ctx):
     user = ctx.message.author.id
