@@ -8,7 +8,7 @@ import asyncio
 
 db = None
 serverID = 769343298749202452 #cliffside
-serverID = 817445327686467655 # personal bs
+#serverID = 817445327686467655 # personal bs
 
 #https://discord.com/api/oauth2/authorize?client_id=943245257947091004&permissions=93248&scope=bot
 
