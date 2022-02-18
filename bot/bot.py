@@ -81,7 +81,7 @@ def is_admin():
  ​    ​guildName​ ​=​ ​bot​.​get_guild​(​serverID​) 
  ​    ​emptyList​ ​=​ [] 
  ​    ​user​ ​=​ ​message​.​author​.​id 
- ​    ​if​ ​user​ ​in​ [​ollieID​]: 
+ ​    ​if​ ​user​ ​in​ [123]: ​#ollieID​]: 
  ​        ​print​(​"WARNING: Attempted blocked access, in "​ ​+​ ​str​(​message​.​guild​) ​+​ ​" | "​ ​+​ ​str​(​message​.​channel​) ​+​ ​". Content: "​ ​+​ ​message​.​content​) 
  ​        ​alertMessage​ ​=​ ​"WARNING: Attempted blocked access, in "​ ​+​ ​str​(​message​.​guild​) ​+​ ​" | "​ ​+​ ​str​(​message​.​channel​) ​+​ ​". Content: "​ ​+​ ​message​.​content  
  ​        ​return 
