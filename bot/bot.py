@@ -1,6 +1,6 @@
 import discord # import discord.py
 from discord.ext import commands # import additional discord.py functionality
-#import random # RNG
+import random # RNG
 import typing # allow parameters to be optional
 import os # import the OS details, including our hidden bot token
 import asyncpg # import async/await postgres
@@ -74,6 +74,7 @@ def is_admin():
 ## Code Here ----------------------------------------------------------
 @bot.event
 async def on_message(message):
+    #if message.server.id != 817445327686467655:
     contents = message.content
     cleanContents = contents.replace(" ","").lower()
     semicleanContents = contents.replace("'","").lower()
