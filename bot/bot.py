@@ -22,7 +22,7 @@ greetResponses = [
 
 kissResponses = [
     "If it's okay, here's a kiss for you too! :kissing_closed_eyes:",
-    "Don't forget to ask before you kiss anyone. :relieved;",
+    "Don't forget to ask before you kiss anyone. :relieved:",
     "Kisses on my nose and paws are my favourite. :pleading_face:",
     ":point_right: :point_left:",
     "May I also have a kiss? :pleading_face:",
@@ -74,49 +74,49 @@ def is_admin():
 ## Code Here ----------------------------------------------------------
 @bot.event
 async def on_message(message):
-    #if message.server.id != 817445327686467655:
-    contents = message.content
-    cleanContents = contents.replace(" ","").lower()
-    semicleanContents = contents.replace("'","").lower()
-    semicleanContents = semicleanContents.replace(",","").lower()
-    semicleanContents = semicleanContents.replace("nows","now is").lower()
-    semicleanContents = semicleanContents.replace("favourite","favorite").lower()
-    currentChannel = message.channel
-    guildName = bot.get_guild(serverID)
-    emptyList = []
-    user = message.author.id
-    if user in [245616657899323394]:
-        print("WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content)
-        alertMessage = "WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content
-        await dm_user(191278750032330753,alertMessage,"Alert")
-        return
-    try:
-        serverNickname = message.author.nick
-    except AttributeError:
-        serverNickname = str(message.author)
+    if message.server.id != 817445327686467655:
+        contents = message.content
+        cleanContents = contents.replace(" ","").lower()
+        semicleanContents = contents.replace("'","").lower()
+        semicleanContents = semicleanContents.replace(",","").lower()
+        semicleanContents = semicleanContents.replace("nows","now is").lower()
+        semicleanContents = semicleanContents.replace("favourite","favorite").lower()
+        currentChannel = message.channel
+        guildName = bot.get_guild(serverID)
+        emptyList = []
+        user = message.author.id
+        if user in [245616657899323394]:
+            print("WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content)
+            alertMessage = "WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content
+            await dm_user(191278750032330753,alertMessage,"Alert")
+            return
+        try:
+            serverNickname = message.author.nick
+        except AttributeError:
+            serverNickname = str(message.author)
 
-    if message.author != bot.user:
-        if bot.user.mentioned_in(message):
-            messageChoice = random.choice(greetResponses)
-            await message.channel.send(messageChoice)
-        
-        #if currentChannel.id in spadesChannels:
-        if "ghost" in semicleanContents:
-            responseList = ghostResponses
-        elif any(responseCue in semicleanContents for responseCue in ["flytoes","mrtoes","mistertoes","mr.toes"]):
-            responseList = greetResponses
-        elif "kiss" in semicleanContents:
-            responseList = kissResponses
-        elif "kendall" in semicleanContents:
-            responseList = ["This is your reminder to drink some water!"]
-        else:
-            responseList = []
-                
-        if responseList != emptyList:
-            responseCheck = random.choices([True,False],cum_weights=[1,6])[0]
-            if responseCheck:
-                response = random.choice(responseList)
-                await message.channel.send(response)
+        if message.author != bot.user:
+            if bot.user.mentioned_in(message):
+                messageChoice = random.choice(greetResponses)
+                await message.channel.send(messageChoice)
+
+            #if currentChannel.id in spadesChannels:
+            if "ghost" in semicleanContents:
+                responseList = ghostResponses
+            elif any(responseCue in semicleanContents for responseCue in ["flytoes","mrtoes","mistertoes","mr.toes"]):
+                responseList = greetResponses
+            elif "kiss" in semicleanContents:
+                responseList = kissResponses
+            elif "kendall" in semicleanContents:
+                responseList = ["This is your reminder to drink some water!"]
+            else:
+                responseList = []
+
+            if responseList != emptyList:
+                responseCheck = random.choices([True,False],cum_weights=[1,6])[0]
+                if responseCheck:
+                    response = random.choice(responseList)
+                    await message.channel.send(response)
             
     ctx = await bot.get_context(message)
     await bot.invoke(ctx)
