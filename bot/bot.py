@@ -113,7 +113,7 @@ async def on_message(message):
                 responseList = []
 
             if responseList != emptyList:
-                responseCheck = random.choices([True,False],cum_weights=[1,6])[0]
+                responseCheck = random.choices([True,False],cum_weights=[1,4])[0]
                 if responseCheck:
                     response = random.choice(responseList)
                     await message.channel.send(response)
