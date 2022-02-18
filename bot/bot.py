@@ -87,7 +87,7 @@ async def on_message(message):
     if user in [245616657899323394]:
         print("WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content)
         alertMessage = "WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content
-awaitdm_user(191278750032330753,alertMessage,"Alert")
+        await dm_user(191278750032330753,alertMessage,"Alert")
         return
     try:
         serverNickname = message.author.nick
