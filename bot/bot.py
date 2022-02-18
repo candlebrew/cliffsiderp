@@ -15,7 +15,7 @@ greetResponses = [
     "Let's all be kind to one another. :relaxed:",
     "Thank you for thinking about me. :pleading_face:",
     ":slight_smile: :heartpulse:",
-    "Mind the clan borders...:unamused:",
+    "Mind the clan borders... :unamused:",
     "I'm pretty Fly for a Toes guy. :relieved:",
     "Does anyone have any birch bark? :anguished:"
 ]
