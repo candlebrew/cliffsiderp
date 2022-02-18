@@ -68,6 +68,54 @@ def is_admin():
     return commands.check(predicate)
 
 ## Code Here ----------------------------------------------------------
+ 
+ ​@​bot​.​event 
+ ​async​ ​def​ ​on_message​(​message​): 
+ ​    ​contents​ ​=​ ​message​.​content 
+ ​    ​cleanContents​ ​=​ ​contents​.​replace​(​" "​,​""​).​lower​() 
+ ​    ​semicleanContents​ ​=​ ​contents​.​replace​(​"'"​,​""​).​lower​() 
+ ​    ​semicleanContents​ ​=​ ​semicleanContents​.​replace​(​","​,​""​).​lower​() 
+ ​    ​semicleanContents​ ​=​ ​semicleanContents​.​replace​(​"nows"​,​"now is"​).​lower​() 
+ ​    ​semicleanContents​ ​=​ ​semicleanContents​.​replace​(​"favourite"​,​"favorite"​).​lower​() 
+ ​    ​currentChannel​ ​=​ ​message​.​channel 
+ ​    ​guildName​ ​=​ ​bot​.​get_guild​(​serverID​) 
+ ​    ​emptyList​ ​=​ [] 
+ ​    ​user​ ​=​ ​message​.​author​.​id 
+ ​    ​if​ ​user​ ​in​ [​ollieID​]: 
+ ​        ​print​(​"WARNING: Attempted blocked access, in "​ ​+​ ​str​(​message​.​guild​) ​+​ ​" | "​ ​+​ ​str​(​message​.​channel​) ​+​ ​". Content: "​ ​+​ ​message​.​content​) 
+ ​        ​alertMessage​ ​=​ ​"WARNING: Attempted blocked access, in "​ ​+​ ​str​(​message​.​guild​) ​+​ ​" | "​ ​+​ ​str​(​message​.​channel​) ​+​ ​". Content: "​ ​+​ ​message​.​content  
+ ​        ​return 
+ ​    ​try​: 
+ ​        ​serverNickname​ ​=​ ​message​.​author​.​nick 
+ ​    ​except​ ​AttributeError​: 
+ ​        ​serverNickname​ ​=​ ​str​(​message​.​author​) 
+  
+ ​    ​if​ ​message​.​author​ ​!=​ ​bot​.​user​: 
+ ​        ​if​ ​bot​.​user​.​mentioned_in​(​message​): 
+ ​            ​messageChoice​ ​=​ ​random​.​choice​(​greetResponses) 
+ ​            ​await​ ​message​.​channel​.​send​(​messageChoice​)
+ ​         
+ ​        #​if ​currentChannel​.​id​ ​in​ ​spadesChannels​: 
+ ​        if​ ​"ghost"​ ​in​ ​semicleanContents​: 
+ ​            ​responseList​ ​=​ ghostResponses
+ ​        ​elif​ ​any​(​responseCue​ ​in​ ​semicleanContents​ ​for​ ​responseCue​ ​in​ [​"flytoes"​,​"mr toes","mister toes","mr. toes"​]): 
+ ​            ​responseList​ ​=​ greetResponses
+ ​        ​elif​ ​"kiss"​ ​in​ ​semicleanContents​: 
+ ​            ​responseList​ ​=​ kissResponses 
+ ​        ​elif​ ​"kendall"​ ​in​ ​semicleanContents​: 
+ ​            ​responseList​ ​=​ [​"This is your reminder to drink some water!"​] 
+ ​        ​else​: 
+ ​            ​responseList​ ​=​ [] 
+ ​                 
+ ​        ​if​ ​responseList​ ​!=​ ​emptyList​: 
+ ​            ​responseCheck​ ​=​ ​random​.​choices​([​True​,​False​],​cum_weights​=​[​1​,​6​])[​0​]
+ ​            ​if​ ​responseCheck​: 
+ ​                ​response​ ​=​ ​random​.​choice​(​responseList​) 
+ ​                ​await​ ​message​.​channel​.​send​(​response​) 
+ ​             
+ ​    ​ctx​ ​=​ ​await​ ​bot​.​get_context​(​message​) 
+ ​    ​await​ ​bot​.​invoke​(​ctx​)
+
 @bot.group()
 async def dev(ctx):
     pass
