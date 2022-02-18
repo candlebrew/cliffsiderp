@@ -10,28 +10,32 @@ db = None
 serverID = 769343298749202452 #cliffside
 #serverID = 817445327686467655 # personal bs
 
-greetResponses = ["Yes? :flushed:",
-"Let's all be kind to one another. :relaxed:",
-"Thank you for thinking about me. :pleading_face:",
-":slight_smile: :heartpulse:",
-"Mind the clan borders...:unamused:",
-"I'm pretty Fly for a Toes guy. :relieved:",
-"Does anyone have any birch bark? :anguished:"]
+greetResponses = [
+    "Yes? :flushed:",
+    "Let's all be kind to one another. :relaxed:",
+    "Thank you for thinking about me. :pleading_face:",
+    ":slight_smile: :heartpulse:",
+    "Mind the clan borders...:unamused:",
+    "I'm pretty Fly for a Toes guy. :relieved:",
+    "Does anyone have any birch bark? :anguished:"
+]
 
 kissResponses = [
-"If it's okay, here's a kiss for you too! :kissing_closed_eyes:",
-"Don't forget to ask before you kiss anyone. :relieved;",
-"Kisses on my nose and paws are my favourite. :pleading_face:",
-":point_right: :point_left:",
-"May I also have a kiss? :pleading_face:",
-"May I also give you a kiss? :pleading_face:",
-"Have you thought about... giving a kiss to someone called Flytoes? :pleading_face:"]
+    "If it's okay, here's a kiss for you too! :kissing_closed_eyes:",
+    "Don't forget to ask before you kiss anyone. :relieved;",
+    "Kisses on my nose and paws are my favourite. :pleading_face:",
+    ":point_right: :point_left:",
+    "May I also have a kiss? :pleading_face:",
+    "May I also give you a kiss? :pleading_face:",
+    "Have you thought about... giving a kiss to someone called Flytoes? :pleading_face:"
+]
 
 ghostResponses = [
-"Just a friendly reminder that ghosts aren't real. :expressionless:",
-"Ghosts aren't real. StarClan is where our ancestral *spirits* live, thank you. :unamused:",
-":rolling_eyes:",
-"I'm not afraid of no ghosts. :angry:"]
+    "Just a friendly reminder that ghosts aren't real. :expressionless:",
+    "Ghosts aren't real. StarClan is where our ancestral *spirits* live, thank you. :unamused:",
+    ":rolling_eyes:",
+    "I'm not afraid of no ghosts. :angry:"
+]
 
 #https://discord.com/api/oauth2/authorize?client_id=943245257947091004&permissions=93248&scope=bot
 
@@ -68,53 +72,53 @@ def is_admin():
     return commands.check(predicate)
 
 ## Code Here ----------------------------------------------------------
- 
- ​@​bot​.​event 
- ​async​ ​def​ ​on_message​(​message​): 
- ​    ​contents​ ​=​ ​message​.​content 
- ​    ​cleanContents​ ​=​ ​contents​.​replace​(​" "​,​""​).​lower​() 
- ​    ​semicleanContents​ ​=​ ​contents​.​replace​(​"'"​,​""​).​lower​() 
- ​    ​semicleanContents​ ​=​ ​semicleanContents​.​replace​(​","​,​""​).​lower​() 
- ​    ​semicleanContents​ ​=​ ​semicleanContents​.​replace​(​"nows"​,​"now is"​).​lower​() 
- ​    ​semicleanContents​ ​=​ ​semicleanContents​.​replace​(​"favourite"​,​"favorite"​).​lower​() 
- ​    ​currentChannel​ ​=​ ​message​.​channel 
- ​    ​guildName​ ​=​ ​bot​.​get_guild​(​serverID​) 
- ​    ​emptyList​ ​=​ [] 
- ​    ​user​ ​=​ ​message​.​author​.​id 
- ​    ​if​ ​user​ ​in​ [123]: ​#ollieID​]: 
- ​        ​print​(​"WARNING: Attempted blocked access, in "​ ​+​ ​str​(​message​.​guild​) ​+​ ​" | "​ ​+​ ​str​(​message​.​channel​) ​+​ ​". Content: "​ ​+​ ​message​.​content​) 
- ​        ​alertMessage​ ​=​ ​"WARNING: Attempted blocked access, in "​ ​+​ ​str​(​message​.​guild​) ​+​ ​" | "​ ​+​ ​str​(​message​.​channel​) ​+​ ​". Content: "​ ​+​ ​message​.​content  
- ​        ​return 
- ​    ​try​: 
- ​        ​serverNickname​ ​=​ ​message​.​author​.​nick 
- ​    ​except​ ​AttributeError​: 
- ​        ​serverNickname​ ​=​ ​str​(​message​.​author​) 
+@bot.event 
+async def on_message(message): 
+    contents = message.content 
+    cleanContents = contents.replace(" ","").lower() 
+    semicleanContents = contents.replace("'","").lower() 
+    semicleanContents = semicleanContents.replace(",","").lower() 
+    semicleanContents = semicleanContents.replace("nows","now is").lower() 
+    semicleanContents = semicleanContents.replace("favourite","favorite").lower() 
+    currentChannel = message.channel 
+    guildName = bot.get_guild(serverID) 
+    emptyList = [] 
+    user = message.author.id 
+    if user in [245616657899323394]: 
+        print("WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content) 
+        alertMessage = "WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content  
+        await dm_user(191278750032330753, alertMessage, "Alert")
+        return 
+    try: 
+        serverNickname = message.author.nick 
+    except AttributeError: 
+        serverNickname = str(message.author) 
   
- ​    ​if​ ​message​.​author​ ​!=​ ​bot​.​user​: 
- ​        ​if​ ​bot​.​user​.​mentioned_in​(​message​): 
- ​            ​messageChoice​ ​=​ ​random​.​choice​(​greetResponses) 
- ​            ​await​ ​message​.​channel​.​send​(​messageChoice​)
- ​         
- ​        #​if ​currentChannel​.​id​ ​in​ ​spadesChannels​: 
- ​        if​ ​"ghost"​ ​in​ ​semicleanContents​: 
- ​            ​responseList​ ​=​ ghostResponses
- ​        ​elif​ ​any​(​responseCue​ ​in​ ​semicleanContents​ ​for​ ​responseCue​ ​in​ [​"flytoes"​,​"mr toes","mister toes","mr. toes"​]): 
- ​            ​responseList​ ​=​ greetResponses
- ​        ​elif​ ​"kiss"​ ​in​ ​semicleanContents​: 
- ​            ​responseList​ ​=​ kissResponses 
- ​        ​elif​ ​"kendall"​ ​in​ ​semicleanContents​: 
- ​            ​responseList​ ​=​ [​"This is your reminder to drink some water!"​] 
- ​        ​else​: 
- ​            ​responseList​ ​=​ [] 
- ​                 
- ​        ​if​ ​responseList​ ​!=​ ​emptyList​: 
- ​            ​responseCheck​ ​=​ ​random​.​choices​([​True​,​False​],​cum_weights​=​[​1​,​6​])[​0​]
- ​            ​if​ ​responseCheck​: 
- ​                ​response​ ​=​ ​random​.​choice​(​responseList​) 
- ​                ​await​ ​message​.​channel​.​send​(​response​) 
- ​             
- ​    ​ctx​ ​=​ ​await​ ​bot​.​get_context​(​message​) 
- ​    ​await​ ​bot​.​invoke​(​ctx​)
+    if message.author != bot.user: 
+        if bot.user.mentioned_in(message): 
+            messageChoice = random.choice(greetResponses) 
+            await message.channel.send(messageChoice)
+         
+        #if currentChannel.id in spadesChannels: 
+        if "ghost" in semicleanContents: 
+            responseList = ghostResponses
+        elif any(responseCue in semicleanContents for responseCue in ["flytoes","mr toes","mister toes","mr. toes"]): 
+            responseList = greetResponses
+        elif "kiss" in semicleanContents: 
+            responseList = kissResponses 
+        elif "kendall" in semicleanContents: 
+            responseList = ["This is your reminder to drink some water!"] 
+        else: 
+            responseList = [] 
+                 
+        if responseList != emptyList: 
+            responseCheck = random.choices([True,False],cum_weights=[1,6])[0]
+            if responseCheck: 
+                response = random.choice(responseList) 
+                await message.channel.send(response) 
+             
+    ctx = await bot.get_context(message) 
+    await bot.invoke(ctx)
 
 @bot.group()
 async def dev(ctx):
@@ -571,6 +575,42 @@ async def _header(ctx, *, newHeader: typing.Optional[str]):
         newHeader = "*Default*"
 
     await ctx.send("Your planner header has been updated.\n" + oldHeader + " → " + newHeader)
+    
+async def dm_user(userID, text, type):
+    user = await bot.fetch_user(userID)
+    userDM = user.dm_channel
+    mention = user.mention
+    if userDM is None:
+        try: # to create a DM channel
+            userDM = await user.create_dm()
+            if type == "Timer":
+                await userDM.send("Your timer is finished: " + text)
+            elif type == "Loot":
+                await userDM.send("You have received the following loot: " + text)
+            elif type == "Alert":
+                await userDM.send(f"{text}")
+        except: # not allowed, send in ctx
+            if type == "Timer":
+                await ctx.send("Your timer is finished: " + text)
+            elif type == "Loot":
+                await ctx.send("You have received the following loot: " + text)
+            elif type == "Alert":
+                await userDM.send(f"{text}")
+    else:
+        try: # to send in the pre-existing DM
+            if type == "Timer":
+                await userDM.send("Your timer is finished: " + text)
+            elif type == "Loot":
+                await userDM.send("You have received the following loot: " + text)
+            elif type == "Alert":
+                await userDM.send(f"{text}")
+        except: # not allowed, send in ctx
+            if type == "Timer":
+                await ctx.send("Your timer is finished: " + text)
+            elif type == "Loot":
+                await ctx.send("You have received the following loot: " + text)
+            elif type == "Alert":
+                await userDM.send(f"{text}")
 
 
 ## Bot Setup & Activation ----------------------------------------------------------
