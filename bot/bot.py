@@ -73,52 +73,52 @@ def is_admin():
 
 ## Code Here ----------------------------------------------------------
 @bot.event
-async def on_message(message):
-    contents = message.content
-    cleanContents = contents.replace(" ","").lower()
-    semicleanContents = contents.replace("'","").lower()
-    semicleanContents = semicleanContents.replace(",","").lower()
-    semicleanContents = semicleanContents.replace("nows","now is").lower()
-    semicleanContents = semicleanContents.replace("favourite","favorite").lower()
-    currentChannel = message.channel
-    guildName = bot.get_guild(serverID)
-    emptyList = []
-    user = message.author.id
-    if user in [245616657899323394]:
-        print("WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content)
-        alertMessage = "WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content
+async def on_message(message):
+    contents = message.content
+    cleanContents = contents.replace(" ","").lower()
+    semicleanContents = contents.replace("'","").lower()
+    semicleanContents = semicleanContents.replace(",","").lower()
+    semicleanContents = semicleanContents.replace("nows","now is").lower()
+    semicleanContents = semicleanContents.replace("favourite","favorite").lower()
+    currentChannel = message.channel
+    guildName = bot.get_guild(serverID)
+    emptyList = []
+    user = message.author.id
+    if user in [245616657899323394]:
+        print("WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content)
+        alertMessage = "WARNING: Attempted blocked access, in " + str(message.guild) + " | " + str(message.channel) + ". Content: " + message.content
 awaitdm_user(191278750032330753,alertMessage,"Alert")
-        return
-    try:
-        serverNickname = message.author.nick
-    except AttributeError:
-        serverNickname = str(message.author)
+        return
+    try:
+        serverNickname = message.author.nick
+    except AttributeError:
+        serverNickname = str(message.author)
 
-    if message.author != bot.user:
-        if bot.user.mentioned_in(message):
-            messageChoice = random.choice(greetResponses)
-            await message.channel.send(messageChoice)
-        
-        #if currentChannel.id in spadesChannels:
-        if "ghost" in semicleanContents:
-            responseList = ghostResponses
-        elif any(responseCue in semicleanContents for responseCue in ["flytoes","mrtoes","mistertoes","mr.toes"]):
-            responseList = greetResponses
-        elif "kiss" in semicleanContents:
-            responseList = kissResponses
-        elif "kendall" in semicleanContents:
-            responseList = ["This is your reminder to drink some water!"]
-        else:
-            responseList = []
-                
-        if responseList != emptyList:
-            responseCheck = random.choices([True,False],cum_weights=[1,6])[0]
-            if responseCheck:
-            response = random.choice(responseList)
-                await message.channel.send(response)
-            
-    ctx = await bot.get_context(message)
-    await bot.invoke(ctx)
+    if message.author != bot.user:
+        if bot.user.mentioned_in(message):
+            messageChoice = random.choice(greetResponses)
+            await message.channel.send(messageChoice)
+        
+        #if currentChannel.id in spadesChannels:
+        if "ghost" in semicleanContents:
+            responseList = ghostResponses
+        elif any(responseCue in semicleanContents for responseCue in ["flytoes","mrtoes","mistertoes","mr.toes"]):
+            responseList = greetResponses
+        elif "kiss" in semicleanContents:
+            responseList = kissResponses
+        elif "kendall" in semicleanContents:
+            responseList = ["This is your reminder to drink some water!"]
+        else:
+            responseList = []
+                
+        if responseList != emptyList:
+            responseCheck = random.choices([True,False],cum_weights=[1,6])[0]
+            if responseCheck:
+            response = random.choice(responseList)
+                await message.channel.send(response)
+            
+    ctx = await bot.get_context(message)
+    await bot.invoke(ctx)
 
 @bot.group()
 async def dev(ctx):
@@ -355,7 +355,7 @@ async def header(ctx, *, newHeader: typing.Optional[str]):
     if newHeader is None:
         newHeader = "*Default*"
 
-    await ctx.send("Your tracker header has been updated.\n" + oldHeader + " → " + newHeader)
+    await ctx.send("Your tracker header has been updated.\n" + oldHeader + " ? " + newHeader)
 
 @commands.group(invoke_without_command=True, aliases=["plan","pl"])
 async def planner(ctx):
@@ -574,7 +574,7 @@ async def _header(ctx, *, newHeader: typing.Optional[str]):
     if newHeader is None:
         newHeader = "*Default*"
 
-    await ctx.send("Your planner header has been updated.\n" + oldHeader + " → " + newHeader)
+    await ctx.send("Your planner header has been updated.\n" + oldHeader + " ? " + newHeader)
     
 async def dm_user(userID, text, type):
     user = await bot.fetch_user(userID)
