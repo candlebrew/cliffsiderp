@@ -74,7 +74,7 @@ def is_admin():
 ## Code Here ----------------------------------------------------------
 @bot.event
 async def on_message(message):
-    if message.server.id != 817445327686467655:
+    if message.guild.id != 817445327686467655:
         contents = message.content
         cleanContents = contents.replace(" ","").lower()
         semicleanContents = contents.replace("'","").lower()
