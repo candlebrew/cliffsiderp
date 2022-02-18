@@ -10,6 +10,29 @@ db = None
 serverID = 769343298749202452 #cliffside
 #serverID = 817445327686467655 # personal bs
 
+greetResponses = ["Yes? :flushed:",
+"Let's all be kind to one another. :relaxed:",
+"Thank you for thinking about me. :pleading_face:",
+":slight_smile: :heartpulse:",
+"Mind the clan borders...:unamused:",
+"I'm pretty Fly for a Toes guy. :relieved:",
+"Does anyone have any birch bark? :anguished:"]
+
+kissResponses = [
+"If it's okay, here's a kiss for you too! :kissing_closed_eyes:",
+"Don't forget to ask before you kiss anyone. :relieved;",
+"Kisses on my nose and paws are my favourite. :pleading_face:",
+":point_right: :point_left:",
+"May I also have a kiss? :pleading_face:",
+"May I also give you a kiss? :pleading_face:",
+"Have you thought about... giving a kiss to someone called Flytoes? :pleading_face:"]
+
+ghostResponses = [
+"Just a friendly reminder that ghosts aren't real. :expressionless:",
+"Ghosts aren't real. StarClan is where our ancestral *spirits* live, thank you. :unamused:",
+":rolling_eyes:",
+"I'm not afraid of no ghosts. :angry:"]
+
 #https://discord.com/api/oauth2/authorize?client_id=943245257947091004&permissions=93248&scope=bot
 
 ## Connecting the DB ----------------------------------------------------------
