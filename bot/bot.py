@@ -114,7 +114,7 @@ async def on_message(message):
         if responseList != emptyList:
             responseCheck = random.choices([True,False],cum_weights=[1,6])[0]
             if responseCheck:
-            response = random.choice(responseList)
+                response = random.choice(responseList)
                 await message.channel.send(response)
             
     ctx = await bot.get_context(message)
