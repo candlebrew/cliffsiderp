@@ -263,12 +263,11 @@ async def open(ctx, rpID: int):
     await ctx.send(f"RP #{rpID} has been reopened.")
 
 @roleplay.command(aliases=["c"])
-async def close(ctx, rpID: int, event: typing.Optional[str]):
+async def close(ctx, rpID: int):
     user = ctx.message.author.id
     cliffside = bot.get_guild(serverID)
     serverMember = await cliffside.fetch_member(user)
     serverNickname = serverMember.display_name
-    sendChannel = bot.get_channel(eventLoggingChannelID)
 
     rpList = await db.fetchval("SELECT rp_list FROM users WHERE uid = $1;",user)
 
@@ -277,30 +276,6 @@ async def close(ctx, rpID: int, event: typing.Optional[str]):
         await db.execute("UPDATE users SET rp_list = $1 WHERE uid = $2;",rpList,user)
         await db.execute("UPDATE rps SET status = 'CLOSED' WHERE id = $1;",rpID)
         await ctx.send("The RP has been closed and will no longer show in your tracker :blush:")
-        if event == "event":
-            rpChannel = await db.fetchval("SELECT channel FROM rps WHERE id = $1;",rpID)
-            rpCharacters = await db.fetchval("SELECT characters FROM rps WHERE id = $1;",rpID)
-            rpPartners = await db.fetchval("SELECT partners FROM rps WHERE id = $1;",rpID)
-            rpNotes = await db.fetchval("SELECT notes FROM rps WHERE id = $1;",rpID)
-
-            channelDict = {}
-            channelList = cliffside.channels
-            for channel in channelList:
-                channelDict[channel.name] = channel.id
-
-            sendMessage = serverNickname + " has logged: \n"
-            sendMessage += " " + str(rpID) + ". "
-            try:
-                sendMessage += "<#" + str(channelDict[rpChannel]) + ">"
-            except:
-                sendMessage += "#" + rpChannel
-            if rpCharacters is not None:
-                sendMessage += ": " + rpCharacters
-            if rpPartners is not None:
-                sendMessage += " with " + rpPartners
-            if rpNotes is not None:
-                sendMessage += " [" + rpNotes + "]"
-            await sendChannel.send(sendMessage)
     else:
         await ctx.send("Sorry, I couldn't find that roleplay. :worried:")
 
