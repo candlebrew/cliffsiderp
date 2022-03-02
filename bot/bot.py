@@ -6,6 +6,8 @@ import os # import the OS details, including our hidden bot token
 import asyncpg # import async/await postgres
 import asyncio
 
+from config import *
+
 db = None
 serverID = 769343298749202452 #cliffside
 #serverID = 817445327686467655 # personal bs
@@ -120,6 +122,22 @@ async def on_message(message):
             
     ctx = await bot.get_context(message)
     await bot.invoke(ctx)
+    
+@bot.command(aliases=["names","name"])
+async def namegen(ctx, numberNames: typing.Optional[int]):
+    user = ctx.author.mention
+    if numberNames is None:
+        numberNames = 1
+        
+    nameText = ""
+    for i in range(numberNames):
+        name = ""
+        name += random.choice(prefixesList)
+        name += random.choice(suffixesList)
+        nameText += name
+        if i != (numberNames - 1):
+            nameText += ", "
+    await ctx.send(f"{user} {nameText}")       
 
 @bot.group()
 async def dev(ctx):
