@@ -6,7 +6,7 @@ import os # import the OS details, including our hidden bot token
 import asyncpg # import async/await postgres
 import asyncio
 
-from config import *
+from config.names import *
 
 db = None
 serverID = 769343298749202452 #cliffside
