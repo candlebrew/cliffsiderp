@@ -129,6 +129,10 @@ async def namegen(ctx, numberNames: typing.Optional[int]):
     if numberNames is None:
         numberNames = 1
         
+    if numberNames > 157:
+        await ctx.send("Sorry! I can only send up to 157 names at a time due to Discord's character limit.")
+        return
+        
     nameText = ""
     for i in range(numberNames):
         name = ""
@@ -137,7 +141,7 @@ async def namegen(ctx, numberNames: typing.Optional[int]):
         nameText += name
         if i != (numberNames - 1):
             nameText += ", "
-    await ctx.send(f"{user} {nameText}")       
+    await ctx.send(f"{user}\n{nameText}")       
 
 @bot.group()
 async def dev(ctx):
