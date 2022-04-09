@@ -151,13 +151,13 @@ async def reset(ctx):
     try:
         userCheck = await db.fetchval("SELECT uid FROM users WHERE uid = $1;",user)
         await ctx.send("The connection is fine! The command you were trying may not be formatted correctly, or there's a different bug that needs to be reported.")
-    except InterfaceError:
+    except:
         dbURL = os.environ.get('DATABASE_URL')
         db = await asyncpg.connect(dsn=dbURL, ssl='require')
         try:
             userCheck = await db.fetchval("SELECT uid FROM users WHERE uid = $1;",user)
             await ctx.send("Database connection reset!")
-        except InterfaceError:
+        except:
             await ctx.send("It looks like I can't reset the database. Let Kendall know `line 161`!")
 
 @bot.group()
