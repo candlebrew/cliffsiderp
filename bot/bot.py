@@ -149,8 +149,12 @@ async def namegen(ctx, numberNames: typing.Optional[int]):
             nameText += ", "
     await ctx.send(f"{user}\n{nameText}")
     
-@bot.command()
+@bot.group(aliases=["w"])
 async def weather(ctx):
+    pass
+    
+@weather.command(aliases=["now","here","rp","irp"])
+async def cliffside(ctx):
     async with aiohttp.ClientSession() as session:
         jsonURL = "https://api.openweathermap.org/data/2.5/weather?id=5892532&units=imperial&appid=f9db8388d6cbfc933dba43778b763a2e"
 
