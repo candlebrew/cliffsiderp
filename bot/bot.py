@@ -7,7 +7,7 @@ import asyncpg # import async/await postgres
 import asyncio
 import datetime
 import io
-import DiscordUtils
+# import DiscordUtils
 import json
 from aiohttp import request
 import aiohttp
