@@ -5,6 +5,12 @@ import typing # allow parameters to be optional
 import os # import the OS details, including our hidden bot token
 import asyncpg # import async/await postgres
 import asyncio
+import datetime
+import io
+import DiscordUtils
+import json
+from aiohttp import request
+import aiohttp
 
 from config.names import *
 
@@ -142,6 +148,64 @@ async def namegen(ctx, numberNames: typing.Optional[int]):
         if i != (numberNames - 1):
             nameText += ", "
     await ctx.send(f"{user}\n{nameText}")
+    
+@bot.command()
+    async def weather(ctx):
+        async with aiohttp.ClientSession() as session:
+            jsonURL = "https://api.openweathermap.org/data/2.5/weather?id=5892532&units=imperial&appid=f9db8388d6cbfc933dba43778b763a2e"
+            
+            async with session.get(jsonURL) as thing:
+                try:
+                    load = await thing.read()
+                    jdata = json.loads(load)
+                    currentTemp = jdata['main']['temp']
+                    feelTemp = jdata['main']['feels_like']
+                    currentWeather = jdata['weather'][0]['main']
+                    weatherDesc = jdata['weather'][0]['description']
+                    windSpeed = jdata['wind']['speed']
+                    humidity = jdata['main']['humidity']
+                    try:
+                        rainfall = jdata['rain']['rainfall']
+                    except:
+                        rainfall = None
+                    try:
+                        snowfall = jdata['snow']['snowfall']
+                    except:
+                        snowfall = None
+                except:
+                    await ctx.send("Whoops! Something went wrong. `Line: 176`")
+                    return
+                
+            jsonURL = "https://api.openweathermap.org/data/2.5/weather?id=5892532&units=metric&appid=f9db8388d6cbfc933dba43778b763a2e"
+            async with session.get(jsonURL) as thing:
+                try:
+                    load = await thing.read()
+                    jdata = json.loads(load)
+                    currentTempC = jdata['main']['temp']
+                    feelTempC = jdata['main']['feels_like']
+                except:
+                    await ctx.send("Whoops! Something went wrong. `Line: 187`")
+                    return
+                
+                if currentWeather == "Clouds":
+                    emoji = ":cloud:"
+                elif currentWeather == "Thunderstorm":
+                    emoji = ":thunder_cloud_rain:"
+                elif currentWeather == "Clear":
+                    emoji = ":sunny:"
+                elif currentWeather in ["Rain","Drizzle"]:
+                    emoji = ":cloud_rain:"
+                elif currentWeather == "Snow":
+                    emoji = ":snowflake:"
+                elif currentWeather in ["Mist","Smoke","Haze","Dust","Fog","Ash","Sand","Squall"]:
+                    emoji = ":fog:"
+                elif currentWeather == "Tornado":
+                    emoji = ":cloud_tornado:"
+                    
+                messageText = f"{emoji} **{currentWeather}** {emoji} - *{weatherDesc}*"
+                messageText += f"\n:thermometer: The current temperature is **{currentTempC} C | {currentTemp} F**. It feels like **{feelTempC} C | {feelTemp} F**"
+                messageText += f"\nHumidity: *{humidity}%*\nWind Speed: *{windSpeed} MPH*"
+                await ctx.send(messageText)
     
 @bot.command()
 @is_admin()
