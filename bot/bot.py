@@ -141,7 +141,24 @@ async def namegen(ctx, numberNames: typing.Optional[int]):
         nameText += name
         if i != (numberNames - 1):
             nameText += ", "
-    await ctx.send(f"{user}\n{nameText}")       
+    await ctx.send(f"{user}\n{nameText}")
+    
+@bot.command()
+@is_admin()
+async def reset(ctx):
+    global db
+    
+    try:
+        userCheck = await db.fetchval("SELECT uid FROM users WHERE uid = $1;",user)
+        await ctx.send("The connection is fine! The command you were trying may not be formatted correctly, or there's a different bug that needs to be reported.")
+    except InterfaceError:
+        dbURL = os.environ.get('DATABASE_URL')
+        db = await asyncpg.connect(dsn=dbURL, ssl='require')
+        try:
+            userCheck = await db.fetchval("SELECT uid FROM users WHERE uid = $1;",user)
+            await ctx.send("Database connection reset!")
+        except InterfaceError:
+            await ctx.send("It looks like I can't reset the database. Let Kendall know `line 161`!")
 
 @bot.group()
 async def dev(ctx):
