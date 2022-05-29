@@ -494,7 +494,7 @@ async def _new(ctx, *, characters: typing.Optional[str]):
     user = ctx.message.author.id
     emptyList = []
 
-    await db.execute("INSERT INTO rps (uid, status, notes) VALUES ($1,'OPEN',$2);",user,notes)
+    await db.execute("INSERT INTO rps (uid, status, characters) VALUES ($1,'OPEN',$2);",user,characters)
 
     userCheck = await db.fetchval("SELECT uid FROM users WHERE uid = $1;",user)
     if userCheck is None:
