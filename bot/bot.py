@@ -570,9 +570,6 @@ async def _open(ctx, rpID: int):
 @planner.command(aliases=["c","close"])
 async def _close(ctx, rpID: int):
     user = ctx.message.author.id
-    cliffside = bot.get_guild(serverID)
-    serverMember = await cliffside.fetch_member(user)
-    serverNickname = serverMember.display_name
 
     rpList = await db.fetchval("SELECT plan_list FROM users WHERE uid = $1;",user)
 
