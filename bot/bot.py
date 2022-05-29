@@ -490,7 +490,7 @@ async def planner(ctx):
 
 # s.new <channel> [*notes]
 @planner.command(aliases=["n","add","new"])
-async def _new(ctx, *, notes: typing.Optional[str]):
+async def _new(ctx, *, characters: typing.Optional[str]):
     user = ctx.message.author.id
     emptyList = []
 
