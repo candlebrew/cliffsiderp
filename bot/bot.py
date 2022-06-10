@@ -149,6 +149,49 @@ async def namegen(ctx, numberNames: typing.Optional[int]):
             nameText += ", "
     await ctx.send(f"{user}\n{nameText}")
     
+@bot.command()
+async def prefix(ctx, numberNames: typing.Optional[int], *, suffix: typing.Optional[str]):
+    user = ctx.author.mention
+    if numberNames is None:
+        numberNames = 1
+        
+    if numberNames > 157:
+        await ctx.send("Sorry! I can only send up to 157 names at a time due to Discord's character limit.")
+        return
+        
+    nameText = ""
+    for i in range(numberNames):
+        name = ""
+        name += random.choice(prefixesList)
+        if suffix is not None:
+            #name += random.choice(suffixesList)
+            name += suffix
+        nameText += name
+        if i != (numberNames - 1):
+            nameText += ", "
+    await ctx.send(f"{user}\n{nameText}")
+    
+@bot.command()
+async def suffix(ctx, numberNames: typing.Optional[int], *, prefix: typing.Optional[str]):
+    user = ctx.author.mention
+    if numberNames is None:
+        numberNames = 1
+        
+    if numberNames > 157:
+        await ctx.send("Sorry! I can only send up to 157 names at a time due to Discord's character limit.")
+        return
+        
+    nameText = ""
+    for i in range(numberNames):
+        name = ""
+        if prefix is not None:
+            name += prefix
+        name += random.choice(suffixesList)
+        nameText += name
+        if i != (numberNames - 1):
+            nameText += ", "
+    await ctx.send(f"{user}\n{nameText}")
+    
 @bot.group(aliases=["w"])
 async def weather(ctx):
     pass
