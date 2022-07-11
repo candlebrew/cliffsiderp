@@ -150,6 +150,10 @@ async def namegen(ctx, numberNames: typing.Optional[int]):
     await ctx.send(f"{user}\n{nameText}")
     
 @bot.command()
+async def wallet(ctx):
+    await ctx.send("I think you're looking for `t!wallet` :blush:")
+    
+@bot.command()
 async def prefix(ctx, numberNames: typing.Optional[int], *, suffix: typing.Optional[str]):
     user = ctx.author.mention
     if numberNames is None:
