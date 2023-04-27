@@ -59,6 +59,7 @@ token = os.environ.get('DISCORD_BOT_TOKEN') # This is hosted on HEROKU
 
 intents = discord.Intents.default() # save time typing this shit by saying it here
 intents.members = True
+intents.message_content = True
 
 client = discord.Client(intents=intents)
 
