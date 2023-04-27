@@ -57,10 +57,10 @@ async def run():
 ## Bot Setup ----------------------------------------------------------
 token = os.environ.get('DISCORD_BOT_TOKEN') # This is hosted on HEROKU
 
-client = discord.Client()
-
-intents = discord.Intents.default()
+intents = discord.Intents.default() # save time typing this shit by saying it here
 intents.members = True
+
+client = discord.Client(intents=intents)
 
 bot = commands.Bot(command_prefix=["c!","c,","c."], intents=intents, db=db)
 
