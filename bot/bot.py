@@ -11,6 +11,9 @@ import io
 import json
 from aiohttp import request
 import aiohttp
+import nest_asyncio
+
+nest_asyncio.apply()
 
 from config.names import *
 
