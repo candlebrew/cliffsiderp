@@ -1,4 +1,4 @@
-import discord # import discord.py
+import discord # import discord.py 
 from discord.ext import commands # import additional discord.py functionality
 import random # RNG
 import typing # allow parameters to be optional
