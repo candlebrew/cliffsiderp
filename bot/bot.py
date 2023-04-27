@@ -324,7 +324,7 @@ async def roleplay(ctx):
             for channel in channelList:
                 channelDict[channel.name] = channel.id
 
-            sendMessage += " " + str(rp) + ". "
+            sendMessage += " **" + str(rp) + ".** "
             if rpChannel is not None:
                 try:
                     sendMessage += "<#" + str(channelDict[rpChannel]) + ">"
@@ -391,7 +391,7 @@ async def view(ctx):
             for channel in channelList:
                 channelDict[channel.name] = channel.id
 
-            sendMessage += " " + str(rp) + ". "
+            sendMessage += " **" + str(rp) + ".** "
             if rpChannel is not None:
                 try:
                     sendMessage += "<#" + str(channelDict[rpChannel]) + ">"
@@ -519,7 +519,7 @@ async def planner(ctx):
             for channel in channelList:
                 channelDict[channel.name] = channel.id
 
-            sendMessage += " " + str(rp) + ". "
+            sendMessage += " **" + str(rp) + ".** "
             if rpChannel is not None:
                 try:
                     sendMessage += "<#" + str(channelDict[rpChannel]) + ">"
@@ -588,7 +588,7 @@ async def _view(ctx):
             for channel in channelList:
                 channelDict[channel.name] = channel.id
 
-            sendMessage += " " + str(rp) + ". "
+            sendMessage += " **" + str(rp) + ".** "
             if rpChannel is not None:
                 try:
                     sendMessage += "<#" + str(channelDict[rpChannel]) + ">"
