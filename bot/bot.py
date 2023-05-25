@@ -448,8 +448,8 @@ async def edit(ctx, rpID: int, editType: str, *, newValue: typing.Optional[str])
     user = ctx.message.author.id
     rpList = await db.fetchval("SELECT rp_list FROM users WHERE uid = $1;",user)
 
-    if editType not in ["channel","characters","partners","notes","players","location","humans","people","writers"]:
-        await ctx.send("Please use one of the following: *channel, characters, partners, notes*")
+    if editType not in ["channel","characters","partners","notes","players","location","humans","people","writers","prio","priority"]:
+        await ctx.send("Please use one of the following: *channel, characters, partners, priority, notes*")
     else:
         if rpID not in rpList:
             await ctx.send("Sorry, I couldn't find that roleplay. :worried:")
@@ -458,6 +458,8 @@ async def edit(ctx, rpID: int, editType: str, *, newValue: typing.Optional[str])
                 editType = "partners"
             if editType == "location":
                 editType = "channel"
+            if editType == "prio":
+                editType = "priority"
             updateText = "UPDATE rps SET " + editType + " = $1 WHERE id = $2;"
             await db.execute(updateText,newValue,rpID)
             await ctx.send("Your RP has been updated!")
@@ -668,16 +670,18 @@ async def _edit(ctx, rpID: int, editType: str, *, newValue: typing.Optional[str]
     user = ctx.message.author.id
     rpList = await db.fetchval("SELECT plan_list FROM users WHERE uid = $1;",user)
 
-    if editType not in ["channel","characters","partners","notes","players","location","humans","people","writers"]:
-        await ctx.send("Please use one of the following: *channel, characters, partners, notes*")
+    if editType not in ["channel","characters","partners","notes","players","location","humans","people","writers","prio","priority"]:
+        await ctx.send("Please use one of the following: *channel, characters, partners, priority, notes*")
     else:
         if rpID not in rpList:
-            await ctx.send("Sorry, I couldn't find that plan. :worried:")
+            await ctx.send("Sorry, I couldn't find that planned rp. :worried:")
         else:
             if editType in ["players","humans","people","writers"]:
                 editType = "partners"
             if editType == "location":
                 editType = "channel"
+            if editType == "prio":
+                editType = "priority"
             updateText = "UPDATE rps SET " + editType + " = $1 WHERE id = $2;"
             await db.execute(updateText,newValue,rpID)
             await ctx.send("Your plan has been updated!")
