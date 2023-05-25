@@ -320,6 +320,7 @@ async def roleplay(ctx):
             rpChannel = await db.fetchval("SELECT channel FROM rps WHERE id = $1;",rp)
             rpCharacters = await db.fetchval("SELECT characters FROM rps WHERE id = $1;",rp)
             rpPartners = await db.fetchval("SELECT partners FROM rps WHERE id = $1;",rp)
+            rpPriority = await db.fetchval("SELECT priority FROM rps WHERE id = $1;",rp)
             rpNotes = await db.fetchval("SELECT notes FROM rps WHERE id = $1;",rp)
 
             channelDict = {}
@@ -338,6 +339,8 @@ async def roleplay(ctx):
                 sendMessage += ": " + rpCharacters
             if rpPartners is not None:
                 sendMessage += " with " + rpPartners
+            if rpPriority is not None:
+                sendMessage += " " + rpPriority
             if rpNotes is not None:
                 sendMessage += " [" + rpNotes + "]"
             sendMessage += "\n"
@@ -387,6 +390,7 @@ async def view(ctx):
             rpChannel = await db.fetchval("SELECT channel FROM rps WHERE id = $1;",rp)
             rpCharacters = await db.fetchval("SELECT characters FROM rps WHERE id = $1;",rp)
             rpPartners = await db.fetchval("SELECT partners FROM rps WHERE id = $1;",rp)
+            rpPriority = await db.fetchval("SELECT priority FROM rps WHERE id = $1;",rp)
             rpNotes = await db.fetchval("SELECT notes FROM rps WHERE id = $1;",rp)
 
             channelDict = {}
@@ -405,6 +409,8 @@ async def view(ctx):
                 sendMessage += ": " + rpCharacters
             if rpPartners is not None:
                 sendMessage += " with " + rpPartners
+            if rpPriority is not None:
+                sendMessage += " " + rpPriority
             if rpNotes is not None:
                 sendMessage += " [" + rpNotes + "]"
             sendMessage += "\n"
@@ -515,6 +521,7 @@ async def planner(ctx):
             rpChannel = await db.fetchval("SELECT channel FROM rps WHERE id = $1;",rp)
             rpCharacters = await db.fetchval("SELECT characters FROM rps WHERE id = $1;",rp)
             rpPartners = await db.fetchval("SELECT partners FROM rps WHERE id = $1;",rp)
+            rpPriority = await db.fetchval("SELECT priority FROM rps WHERE id = $1;",rp)
             rpNotes = await db.fetchval("SELECT notes FROM rps WHERE id = $1;",rp)
 
             channelDict = {}
@@ -528,14 +535,15 @@ async def planner(ctx):
                 try:
                     sendMessage += "<#" + str(channelDict[rpChannel]) + ">"
                 except:
-                    sendMessage += rpChannel
-                sendMessage += ": "
+                    sendMessage += "#" + rpChannel
             if rpCharacters is not None:
-                sendMessage += f"{rpCharacters} "
+                sendMessage += ": " + rpCharacters
             if rpPartners is not None:
-                sendMessage += f"with {rpPartners} "
+                sendMessage += " with " + rpPartners
+            if rpPriority is not None:
+                sendMessage += " " + rpPriority
             if rpNotes is not None:
-                sendMessage += "[" + rpNotes + "]"
+                sendMessage += " [" + rpNotes + "]"
             sendMessage += "\n"
         await ctx.send(sendMessage)
 
@@ -584,6 +592,7 @@ async def _view(ctx):
             rpChannel = await db.fetchval("SELECT channel FROM rps WHERE id = $1;",rp)
             rpCharacters = await db.fetchval("SELECT characters FROM rps WHERE id = $1;",rp)
             rpPartners = await db.fetchval("SELECT partners FROM rps WHERE id = $1;",rp)
+            rpPriority = await db.fetchval("SELECT priority FROM rps WHERE id = $1;",rp)
             rpNotes = await db.fetchval("SELECT notes FROM rps WHERE id = $1;",rp)
 
             channelDict = {}
@@ -597,14 +606,15 @@ async def _view(ctx):
                 try:
                     sendMessage += "<#" + str(channelDict[rpChannel]) + ">"
                 except:
-                    sendMessage += rpChannel
-                sendMessage += ": "
+                    sendMessage += "#" + rpChannel
             if rpCharacters is not None:
-                sendMessage += f"{rpCharacters} "
+                sendMessage += ": " + rpCharacters
             if rpPartners is not None:
-                sendMessage += f"with {rpPartners} "
+                sendMessage += " with " + rpPartners
+            if rpPriority is not None:
+                sendMessage += " " + rpPriority
             if rpNotes is not None:
-                sendMessage += "[" + rpNotes + "]"
+                sendMessage += " [" + rpNotes + "]"
             sendMessage += "\n"
         await ctx.send(sendMessage)
 
